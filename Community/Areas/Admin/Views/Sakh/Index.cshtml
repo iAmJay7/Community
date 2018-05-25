@@ -1,0 +1,68 @@
+﻿﻿@using Community.Areas.Admin.Models
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+@model IEnumerable<Community.Areas.Admin.Models.SakhViewModel>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div id="msform">
+            <fieldset>
+                <h2 class="fs-title">Village</h2>
+                <select id="villageId">
+                    @foreach (var a in VillageRepository.Gets())
+                    {
+                        <option value="@a.Id">@a.Name</option>
+                    }
+                </select>
+
+                <input type="text" id="name" placeholder="Sakh name" />
+                <button class="next action-button" onclick="doCreate()">Create</button>
+            </fieldset>
+        </div>
+
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Village</th>
+                    <th>Sakh</th>
+                </tr>
+            </thead>
+            <tbody id="body">
+                @foreach(var a in Model)
+                {
+                    <tr>
+                        <td>@a.Id</td>
+                        <td>@VillageRepository.GetVillaNamegeById(a.VillageId)</td>
+                        <td>@a.Name</td>
+                    </tr>    
+                }
+            </tbody>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+
+
+        function doCreate() {
+            var data = {
+                "name": $("#name").val(),
+                "villageId": $("#villageId").val(),
+            };
+            $.post("/admin/sakh/create", data, function (re) {
+                console.log(re);
+            });
+        }
+    </script>
+</body>
+

@@ -1,0 +1,138 @@
+﻿﻿@using Community.Areas.Admin.Models
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+@model IEnumerable<Community.Areas.Admin.Models.GeneralLoanViewModel>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Loan</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div id="msform">
+            <fieldset>
+                <h2 class="fs-title">General Loan</h2>
+                <select id="villageId" onchange="fetchMember()">
+                    <option value="">Select Person Village</option>
+                    @foreach (var a in VillageRepository.Gets())
+                    {
+                        <option value="@a.Id">@a.Name</option>
+                    }
+                </select>
+                <select id="personId">
+                    <option value="">Select Person</option>
+                </select>
+                <input type="text" id="amount" placeholder="Amount" />
+                <input type="text" id="discription" placeholder="Discription" />
+                <input type="number" id="interestRate" placeholder="Interest Rate" />
+                <input type="number" id="monthlyPeriod" placeholder="Monthly Period" />
+                <button class="next action-button" onclick="doCreate()">Create</button>
+            </fieldset>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table id="table" class="table table-bordered">
+                        <tr>
+                            <th id="0">Id</th>
+                            <th id="1">Person</th>
+                            <th id="2">Amount</th>
+                            <th id="3">Discription</th>
+                            <th id="4">Interest rate</th>
+                            <th id="5">Monthly Period</th>
+                            <th id="6">Date</th>
+                        </tr>
+                        <tbody id="tbody">
+                            @if (Model != null)
+                            {
+                                foreach (var a in Model)
+                                {
+                                    <tr>
+                                        <td>@a.Id</td>
+                                        <td>@a.PersonName</td>
+                                        <td>@a.Amount</td>
+                                        <td>@a.Discription</td>
+                                        <td>@a.InterestRate</td>
+                                        <td>@a.MonthlyPeriod</td>
+                                        <td>@a.Date</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        function fetchMember() {
+            $.post("/home/fetchPersonByVillageId", { "id": $("#villageId").val() }, function (re) {
+                console.log(re);
+                $("#donarId").empty();
+                var opt = $("<option>");
+                opt.attr("value", "");
+                opt.text("Select Donar");
+                opt.appendTo("#personId");
+                for (var a in re) {
+                    var opt = $("<option>");
+                    opt.attr("value", re[a]["Id"]);
+                    opt.text(re[a]["Name"]);
+                    opt.appendTo("#personId");
+                }
+            });
+        }
+
+        function doCreate() {
+            var data = {
+                "personId": $("#personId").val(),
+                "amount":$("#amount").val(),
+                "discription": $("#discription").val(),
+                "interestRate": $("#interestRate").val(),
+                "monthlyPeriod":$("#monthlyPeriod").val()
+            };
+            console.log(data);
+            $.post("/admin/generalLoan/create", data, function (re) {
+                console.log(re);
+                createList(re, "#tbody");
+            });
+        }
+
+        function createList(re, parent) {
+            $(parent).empty();
+            for (var a in re) {
+                var row = $("<tr>");
+                var id = $("<td>");
+                var person = $("<td>");
+                var amount = $("<td>");
+                var discription = $("<td>");
+                var interestRate = $("<td>");
+                var monthlyPeriod = $("<td>");
+                var date = $("<td>");
+                id.text(re[a]["Id"]);
+                person.text(re[a]["PersonName"]);
+                amount.text(re[a]["Amount"]);
+                discription.text(re[a]["discription"]);
+                interestRate.text(re[a]["InterestRate"]);
+                monthlyPeriod.text(re[a]["MonthlyPeriod"]);
+                date.text(re[a]["Date"]);
+
+                id.appendTo(row);
+                person.appendTo(row);
+                amount.appendTo(row);
+                discription.appendTo(row);
+                interestRate.appendTo(row);
+                monthlyPeriod.appendTo(row);
+                date.appendTo(row);
+                row.appendTo(parent);
+            }
+        }
+
+        $("#table th").on("click", function () {
+            $.post("/admin/generalLoan/orderBy", { "orderBy": $(this).attr("id") }, function (re) {
+                createList(re, "#tbody");
+            });
+        })
+    </script>
+</body>

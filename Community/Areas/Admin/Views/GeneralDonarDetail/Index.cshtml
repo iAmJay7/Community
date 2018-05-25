@@ -1,0 +1,124 @@
+﻿﻿@using Community.Areas.Admin.Models
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+@model IEnumerable<Community.Areas.Admin.Models.GeneralDonarDetailViewModel>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Donar Detail</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div id="msform">
+            <fieldset>
+                <h2 class="fs-title">Donar Detail</h2>
+                <select id="villageId" onchange="fetchMember()">
+                    <option value="">Select Donar Village</option>
+                    @foreach (var a in VillageRepository.Gets())
+                    {
+                        <option value="@a.Id">@a.Name</option>
+                    }
+                </select>
+                <select id="donarId">
+                    <option value="">Select Donar</option>
+                </select>
+                <input type="text" id="amount" placeholder="Amount" />
+                <input type="text" id="discription" placeholder="Discription" />
+
+                <button class="next action-button" onclick="doCreate()">Create</button>
+            </fieldset>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table id="table" class="table table-bordered">
+                        <tr>
+                            <th id="0">Id</th>
+                            <th id="1">Donar</th>
+                            <th id="2">Amount</th>
+                            <th id="3">Discription</th>
+                            <th id="4">Date</th>
+                        </tr>
+                        <tbody id="tbody">
+                            @if (Model != null)
+                            {
+                                foreach (var a in Model)
+                                {
+                                    <tr>
+                                        <td>@a.Id</td>
+                                        <td>@a.Donar</td>
+                                        <td>@a.Amount</td>
+                                        <td>@a.Discription</td>
+                                        <td>@a.Date</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        function fetchMember() {
+            $.post("/home/fetchPersonByVillageId", { "id": $("#villageId").val() }, function (re) {
+                console.log(re);
+                $("#donarId").empty();
+                var opt = $("<option>");
+                opt.attr("value", "");
+                opt.text("Select Donar");
+                opt.appendTo("#donarId");
+                for (var a in re) {
+                    var opt = $("<option>");
+                    opt.attr("value", re[a]["Id"]);
+                    opt.text(re[a]["Name"]);
+                    opt.appendTo("#donarId");
+                }
+            });
+        }
+
+        function doCreate() {
+            var data = {
+                "donarId": $("#donarId").val(),
+                "amount":$("#amount").val(),
+                "discription":$("#discription").val()
+            };
+            console.log(data);
+            $.post("/admin/generalDonarDetail/create", data, function (re) {
+                console.log(re);
+                createList(re, "#tbody");
+            });
+        }
+
+        function createList(re, parent) {
+            $(parent).empty();
+            for (var a in re) {
+                var row = $("<tr>");
+                var id = $("<td>");
+                var donar = $("<td>");
+                var amount = $("<td>");
+                var discription = $("<td>");
+                var date = $("<td>");
+                id.text(re[a]["Id"]);
+                donar.text(re[a]["Donar"]);
+                amount.text(re[a]["Amount"]);
+                discription.text(re[a]["Discription"]);
+                date.text(re[a]["Date"]);
+
+                id.appendTo(row);
+                donar.appendTo(row);
+                amount.appendTo(row);
+                discription.appendTo(row);
+                date.appendTo(row);
+                row.appendTo(parent);
+            }
+        }
+        $("#table th").on("click", function () {
+            $.post("/admin/generalDonarDetail/orderBy", { "orderBy": $(this).attr("id") }, function (re) {
+                createList(re, "#tbody");
+            });
+        })
+    </script>
+</body>

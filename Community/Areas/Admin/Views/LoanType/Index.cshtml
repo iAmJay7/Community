@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+@model IEnumerable<Community.Areas.Admin.Models.LoanTypeViewModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div> 
+        <div id="msform">
+            <fieldset>
+                <h2 class="fs-title">Loan Type</h2>
+                <input type="text" id="name" placeholder="Type" />
+                <button class="next action-button" onclick="doCreate()">Create</button>
+            </fieldset>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                        </tr>
+                        <tbody id="tbody">
+                            @if (Model != null)
+                            {
+                                foreach (var a in Model)
+                                {
+                                    <tr>
+                                        <td>@a.Id</td>
+                                        <td>@a.Name</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function doCreate() {
+            $.post("/admin/loanType/create", { "name": $("#name").val() }, function (re) {
+                $("#tbody").empty();
+                for (var a in re) {
+                    var row = $("<tr>");
+                    var id = $("<td>");
+                    var name = $("<td>");
+                    id.text(re[a]["Id"]);
+                    name.text(re[a]["Name"]);
+                    id.appendTo(row);
+                    name.appendTo(row);
+                    row.appendTo("#tbody");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

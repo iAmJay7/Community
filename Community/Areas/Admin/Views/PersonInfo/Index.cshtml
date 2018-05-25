@@ -1,0 +1,306 @@
+﻿
+@{
+    Layout = null;
+}
+﻿@using Community.Areas.Admin.Models
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+@model IEnumerable<Community.Areas.Admin.Models.PersonInfoVModel>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Person Detail</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+    <style>
+        .col-4 input,.col-4 select,.col-4 textarea,.col-4 button {
+            width:100%;
+            margin-top:10px;
+            margin-bottom:10px;
+            padding-left:5px;
+            height:90%;
+            font-size:1.2em;
+        }
+        .subBtn {
+            margin:auto;
+            font-size:2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" style="margin-top:50px;">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="color:white">Person Details</h1>
+            </div>
+        </div>
+        <form method="post" action="/admin/personInfo/create" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-2">
+                            <input type="checkbox" name="isNewFamily" class="form-check-input" id="isNewFamily" />
+                            <label style="color:white" class="form-check-label">New Family</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select id="villageId" name="villageId" class="border border-info" onchange="onVillageSelect()">
+                                <option value="">Select Village</option>
+                                @foreach (var a in VillageRepository.Gets())
+                                {
+                                    <option value="@a.Id">@a.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select id="sakhId" name="sakhId" class="border border-info" onchange="onSakhSelect()">
+                                <option value="">Select Sakh</option>
+
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <input type="number" id="familyId" class="form-control" name="familyId" placeholder="Family Id" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" class="border border-info" name="name" placeholder="Name" />
+                        </div>
+                        <div class="col-4">
+                            <select id="fatherId" name="fatherId" class="border border-info">
+                                <option value="">Father</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select id="motherId" name="motherId" class="border border-info">
+                                <option value="">Mother</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select id="gender" name="gender" class="border border-info">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <input type="date" name="birthdate" class="border border-info" placeholder="Birthdate" />
+                        </div>
+                        <div class="col-4">
+                            <input type="text" name="birthplace" class="border border-info" placeholder="Birthplace" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" name="age" class="border border-info" placeholder="Age" />
+                        </div>
+                        <div class="col-4">
+                            <input type="text" name="education" class="border border-info" placeholder="Education" />
+                        </div>
+                        <div class="col-4">
+                            <input type="text" name="occupation" class="border border-info" placeholder="Ocupation" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <textarea name="currentAddress" class="border border-info" placeholder="Current Address"></textarea>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" name="email" class="border border-info" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" name="mobile" class="border border-info" placeholder="Mobile No" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="file" name="file" placeholder="Photo" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-info subBtn">Create</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th id="0">Id</th>
+                    <th id="1">Family Id</th>
+                    <th id="2">Name</th>
+                    <th id="3">Gender</th>
+                    <th id="4">Age</th>
+                    <th id="5">Birthdate</th>
+                    <th id="6">Birthplace</th>
+                    <th id="7">Education</th>
+                    <th id="8">Occupation</th>
+                    <th id="9">Father</th>
+                    <th id="10">Mother</th>
+                    <th id="11">CAddress</th>
+                    <th id="12">Sakh</th>
+                    <th id="13">Photo</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                @if (Model != null)
+                {
+                    foreach(var a in Model)
+                    {
+                        <tr>
+                            <td>@a.Id</td>
+                            <td>@a.FamilyId</td>
+                            <td>@a.Name</td>
+                            <td>@a.Gender</td>
+                            <td>@a.Age</td>
+                            <td>@a.Birthdate</td>
+                            <td>@a.BirthPlace</td>
+                            <td>@a.Education</td>
+                            <td>@a.Occupation</td>
+                            <td>@a.FatherName</td>
+                            <td>@a.MotherName</td>
+                            <td>@a.CurrentAddress</td>
+                            <td>@a.SakhName</td>
+                            <td>@a.Photo</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        var fatherList = [];
+        var motherList = [];
+
+        $("#isNewFamily").change(function () {
+            if (this.checked) {
+                $("#familyId").attr("disabled", "disabled");
+                
+            } else {
+                $("#familyId").removeAttr("disabled");
+            }
+            console.log($("#isNewFamily").val());
+        })
+        
+        function onVillageSelect() {
+            console.log($("#villageId").val());
+            $.post("/admin/sakh/SakhsByVillageId", { "villageId": $("#villageId").val() }, function (re) {
+                $("#sakhId").empty();
+                var sel = $("<option>");
+                sel.attr("value", "");
+                sel.text("Select Sakh");
+                sel.appendTo("#sakhId");
+                for (var a in re) {
+                    console.log(re[a]);
+                    var opt = $("<option>");
+                    opt.attr("value", re[a]["Id"]);
+                    opt.text(re[a]["Name"]);
+                    opt.appendTo("#sakhId");
+
+                }
+            });
+        }
+
+        function onSakhSelect() {
+            console.log($("#sakhId").val());
+
+            $.post("/Home/FetchPerson", {"sakhId":$("#sakhId").val()}, function (re) {
+
+                if (re) {
+                    console.log(re);
+                    for (var a in re) {
+                        console.log(re[a]["Gender"]);
+                        if (re[a]["Gender"] == "male") {
+                            fatherList.push(re[a]);
+                        } else {
+                            motherList.push(re[a]);
+                        }
+                    }
+
+                    for (var m in fatherList) {
+                        var opt = $("<option>");
+                        opt.attr("value", fatherList[m]["Id"]);
+                        opt.text(fatherList[m]["Name"]);
+                        opt.appendTo("#fatherId");
+                    }
+
+                    for (var m in motherList) {
+                        var opt = $("<option>");
+                        opt.attr("value", motherList[m]["Id"]);
+                        opt.text(motherList[m]["Name"]);
+                        opt.appendTo("#motherId");
+                    }
+
+                }
+
+            });
+
+        }
+        function createList(re, parent) {
+            $(parent).empty();
+            for (var a in re) {
+                var row = $("<tr>");
+                var id=$("<td>"),familyId = $("<td>"), name = $("<td>"), gender = $("<td>"), age = $("<td>"),
+                    birthDate = $("<td>"), birthPlace = $("<td>"), edu = $("<td>"), ocu = $("<td>"),
+                    father = $("<td>"), mother = $("<td>"), cAddress = $("<td>"), sakh = $("<td>"), photo = $("<td>");
+
+                id.text(re["Id"]);
+                familyId.text(re["FamilyId"]);
+                name.text(re["Name"]);
+                gender.text(re["Gender"]);
+                age.text(re["Age"]);
+                birthDate.text(re["Birthdate"]);
+                birthPlace.text(re["BirthPlace"]);
+                edu.text(re["Education"]);
+                ocu.text(re["Occupation"]);
+                father.text(re["FatherName"]);
+                mother.text(re["MotherName"]);
+                cAddress.text(re["CurrentAddress"]);
+                sakh.text(re["SakhName"]);
+                photo.text(re["Photo"]);
+
+                id.appendTo(row);
+                familyId.appendTo(row);
+                name.appendTo(row);
+                gender.appendTo(row);
+                age.appendTo(row);
+                birthDate.appendTo(row);
+                birthPlace.appendTo(row);
+                edu.appendTo(row);
+                ocu.appendTo(row);
+                father.appendTo(row);
+                mother.appendTo(row);
+                cAddress.appendTo(row);
+                sakh.appendTo(row);
+                photo.appendTo(row);
+
+                row.appendTo(parent);
+            }
+        }
+
+        $("#table th").on("click", function () {
+            $.post("/admin/PersonInfo/orderBy", { "orderBy": $(this).attr("id") }, function (re) {
+                createList(re, "#tbody");
+            });
+        })
+    </script>
+</body>
+

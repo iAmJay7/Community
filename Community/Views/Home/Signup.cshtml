@@ -1,0 +1,288 @@
+﻿﻿@using Community.Areas.Admin.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Signup</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <!-- multistep form -->
+        <div id="msform">
+            <!-- progressbar -->
+            <ul id="progressbar">
+                <li class="active">Account Setup</li>
+                <li>Village Detail</li>
+                <li>Social Profiles</li>
+                <li>Personal Details</li>
+            </ul>
+            <!-- fieldsets -->
+            <fieldset>
+                <h2 class="fs-title">Create your account</h2>
+                <h3 class="fs-subtitle">This is step 1</h3>
+                <input type="text" id="email" placeholder="Email" />
+                <input type="password" id="password" placeholder="Password" />
+                <input type="password" id="cpassword" placeholder="Confirm Password" />
+                <input type="button" name="next" class="next action-button" value="Next" />
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title">Village Details</h2>
+                <h3 class="fs-subtitle">We will never sell it</h3>
+                <select id="villageId" onchange="onVillageSelect()">
+                    <option value="">Select Village</option>
+                    @foreach (var a in VillageRepository.Gets())
+                    {
+                        <option value="@a.Id">@a.Name</option>
+                    }
+                </select>
+                <select id="sakhId" onchange="onSakhSelect()">
+                    <option value="">Select Sakh</option>
+
+                </select>
+                <textarea id="address" placeholder="Address"></textarea>
+                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" name="next" class="next action-button" value="Next" />
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title">Personal Details</h2>
+                <h3 class="fs-subtitle">We will never sell it</h3>
+                <input type="text" id="name" placeholder="Name" />
+                <select id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+                <input type="text" id="age" placeholder="Age" />
+                <input type="date" id="birthdate" placeholder="Birthdate" />
+                <input type="text" id="birthplace" placeholder="Birthplace" />
+                <input type="text" id="education" placeholder="Education" />
+                <input type="text" id="occupation" placeholder="Ocupation" />
+                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <input type="button" name="next" class="next action-button" value="Next" />
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title">Family Details</h2>
+                <h3 class="fs-subtitle">We will never sell it</h3>
+                <select id="fatherId">
+                    <option value="">Father</option>
+                </select>
+                <select id="motherId">
+                    <option value="">Mother</option>
+                </select>
+                <input type="text" id="mobile" placeholder="Mobile No" />
+                <textarea id="currentAddress" placeholder="Current Address"></textarea>
+                <input type="button" name="previous" class="previous action-button" value="Previous" />
+                <button onclick="doSubmit()" class="submit action-button">Submit</button>
+            </fieldset>
+
+        </div>
+
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-easing.min.js"></script>
+    <script>
+        var fatherList=[], motherList=[];
+        //jQuery time
+        var current_fs,second_fs, next_fs, previous_fs; //fieldsets
+        var left, opacity, scale; //fieldset properties which we will animate
+        var animating; //flag to prevent quick multi-click glitches
+
+        $(".next").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            second_fs = $(this).parent().next();
+
+            //activate next step on progressbar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(second_fs)).addClass("active");
+
+            //show the next fieldset
+            second_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    //2. bring next_fs from the right(50%)
+                    left = (now * 50) + "%";
+                    //3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'transform': 'scale(' + scale + ')',
+                        'position': 'absolute'
+                    });
+                    second_fs.css({ 'left': left, 'opacity': opacity });
+                },
+                duration: 800,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+        });
+
+        $(".second").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            second_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            //activate next step on progressbar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            second_fs.animate({ opacity: 0 }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    //2. bring next_fs from the right(50%)
+                    left = (now * 50) + "%";
+                    //3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    second_fs.css({
+                        'transform': 'scale(' + scale + ')',
+                        'position': 'absolute'
+                    });
+                    next_fs.css({ 'left': left, 'opacity': opacity });
+                },
+                duration: 800,
+                complete: function () {
+                    second_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+
+        });
+
+        $(".previous").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+
+            //de-activate current step on progressbar
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale previous_fs from 80% to 100%
+                    scale = 0.8 + (1 - now) * 0.2;
+                    //2. take current_fs to the right(50%) - from 0%
+                    left = ((1 - now) * 50) + "%";
+                    //3. increase opacity of previous_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({ 'left': left });
+                    previous_fs.css({ 'transform': 'scale(' + scale + ')', 'opacity': opacity });
+                },
+                duration: 800,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+        });
+
+        function doSubmit() {
+            console.log("clicked");
+            var data = {
+                "name": $("#name").val(),
+                "gender": $("#gender").val(),
+                "birthdate": $("#birthdate").val(),
+                "birthplace": $("#birthplace").val(),
+                "education": $("#education").val(),
+                "occupation": $("#occupation").val(),
+                "fatherId": $("#fatherId").val() == "" ? null : $("#fatherId").val(),
+                "motherId": $("#motherId").val() == "" ? null : $("#motherId").val(),
+                "currentAddress": $("#currentAddress").val(),
+                "villageId": $("#villageId").val(),
+                "sakhId": $("#sakhId").val(),
+                "email": $("#email").val(),
+                "mobile": $("#mobile").val(),
+                "password": $("#password").val()
+            };
+            console.log(data);
+            $.post("/home/signup", data, function (re) {
+                console.log(re);
+            });
+        }
+
+        function onVillageSelect() {
+            console.log($("#villageId").val());
+            $.post("/admin/sakh/SakhsByVillageId", { "villageId": $("#villageId").val() }, function (re) {
+                $("#sakhId").empty();
+                var sel = $("<option>");
+                sel.attr("value", "");
+                sel.text("Select Sakh");
+                sel.appendTo("#sakhId");
+                for (var a in re) {
+                    console.log(re[a]);
+                    var opt = $("<option>");
+                    opt.attr("value", re[a]["Id"]);
+                    opt.text(re[a]["Name"]);
+                    opt.appendTo("#sakhId");
+                    
+                }
+            });
+        }
+        
+        function onSakhSelect() {
+            console.log($("#sakhId").val());
+            
+            $.post("/Home/FetchPerson", {"sakhId":$("#sakhId").val()}, function (re) {
+            
+                if (re) {
+                    console.log(re);
+                    for (var a in re) {
+                        console.log(re[a]["Gender"]);
+                        if (re[a]["Gender"] == "male") {
+                            fatherList.push(re[a]);
+                        } else {
+                            motherList.push(re[a]);
+                        }
+                    }
+
+                    for (var m in fatherList) {
+                        var opt = $("<option>");
+                        opt.attr("value", fatherList[m]["Id"]);
+                        opt.text(fatherList[m]["Name"]);
+                        opt.appendTo("#fatherId");
+                    }
+
+                    for (var m in motherList) {
+                        var opt = $("<option>");
+                        opt.attr("value", motherList[m]["Id"]);
+                        opt.text(motherList[m]["Name"]);
+                        opt.appendTo("#motherId");
+                    }
+
+                }
+                
+            });
+            
+        }
+        
+    </script>
+</body>
+</html>

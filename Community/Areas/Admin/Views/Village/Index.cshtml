@@ -1,0 +1,42 @@
+﻿﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div id="msform">
+            <fieldset>
+                <h2 class="fs-title">Village</h2>
+                <input type="text" id="name" placeholder="Village name" />
+                <input type="text" id="taluka" placeholder="Taluka name" />
+                <input type="text" id="district" placeholder="District name" />
+                <input type="date" id="date" placeholder="date" />
+                <button class="next action-button" onclick="doCreate()">Create</button>
+            </fieldset>
+        </div>
+
+    </div>
+
+    
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        function doCreate() {
+            var data = {
+                "name": $("#name").val(),
+                "taluka": $("#taluka").val(),
+                "district": $("#district").val(),
+                "date": $("#date").val()
+            };
+            $.post("/admin/village/create", data, function (re) {
+                console.log(re);
+            });
+        }
+    </script>
+</body>
+

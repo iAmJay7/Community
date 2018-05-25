@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9c57095cfe3447a49fd7dde592f62a28" Name="Diagram1">
+        <EntityTypeShape EntityType="CommunityDbModel.FamilyInfo" Width="1.5" PointX="5.25" PointY="16.875" />
+        <EntityTypeShape EntityType="CommunityDbModel.GeneralDonarDetail" Width="1.5" PointX="9.75" PointY="36.875" />
+        <EntityTypeShape EntityType="CommunityDbModel.GeneralLoan" Width="1.5" PointX="9.75" PointY="33.125" />
+        <EntityTypeShape EntityType="CommunityDbModel.LoanRepayment" Width="1.5" PointX="12" PointY="25.125" />
+        <EntityTypeShape EntityType="CommunityDbModel.LoanType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CommunityDbModel.LoginDetail" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CommunityDbModel.Marriage" Width="1.5" PointX="9.75" PointY="26.625" />
+        <EntityTypeShape EntityType="CommunityDbModel.MassMrg" Width="1.5" PointX="7.5" PointY="10.625" />
+        <EntityTypeShape EntityType="CommunityDbModel.MassMrgCommitty" Width="1.5" PointX="9.75" PointY="20.875" />
+        <EntityTypeShape EntityType="CommunityDbModel.MassMrgDonarDetail" Width="1.5" PointX="12.75" PointY="16.625" />
+        <EntityTypeShape EntityType="CommunityDbModel.MassMrgExpenditure" Width="1.5" PointX="9.75" PointY="8.875" />
+        <EntityTypeShape EntityType="CommunityDbModel.MassMrgGift" Width="1.5" PointX="9.75" PointY="12.75" />
+        <EntityTypeShape EntityType="CommunityDbModel.MassMrgReg" Width="1.5" PointX="12.75" PointY="12.5" />
+        <EntityTypeShape EntityType="CommunityDbModel.OtherPersonInfo" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CommunityDbModel.PersonInfo" Width="1.5" PointX="7.5" PointY="14" />
+        <EntityTypeShape EntityType="CommunityDbModel.Sakh" Width="1.5" PointX="3" PointY="16.875" />
+        <EntityTypeShape EntityType="CommunityDbModel.Scheme" Width="1.5" PointX="7.5" PointY="23.125" />
+        <EntityTypeShape EntityType="CommunityDbModel.StudentLoan" Width="1.5" PointX="9.75" PointY="16.5" />
+        <EntityTypeShape EntityType="CommunityDbModel.Village" Width="1.5" PointX="0.75" PointY="15.25" />
+        <EntityTypeShape EntityType="CommunityDbModel.VillageStatatic" Width="1.5" PointX="3" PointY="13.875" />
+        <AssociationConnector Association="CommunityDbModel.FK__FamilyInf__SakhI__1BFD2C07" />
+        <AssociationConnector Association="CommunityDbModel.FK__PersonInf__Famil__21B6055D" />
+        <AssociationConnector Association="CommunityDbModel.FK__GeneralDo__Donar__160F4887" />
+        <AssociationConnector Association="CommunityDbModel.FK__GeneralLo__Perso__2A164134" />
+        <AssociationConnector Association="CommunityDbModel.FK__LoanRepay__Gener__4F47C5E3" />
+        <AssociationConnector Association="CommunityDbModel.FK__LoanRepay__Stude__503BEA1C" />
+        <AssociationConnector Association="CommunityDbModel.FK__Marriage__Person__2D27B809" />
+        <AssociationConnector Association="CommunityDbModel.FK__Marriage__ToPers__2E1BDC42" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgCo__MassM__6EF57B66" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgDo__MassM__6383C8BA" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgEx__MassM__6754599E" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgGi__MassM__6A30C649" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgRe__MassM__5EBF139D" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgCo__Membe__6FE99F9F" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgDo__Donar__6477ECF3" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgGi__GiftF__6C190EBB" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgGi__GiftT__6B24EA82" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgRe__Bride__60A75C0F" />
+        <AssociationConnector Association="CommunityDbModel.FK__MassMrgRe__Groom__5FB337D6" />
+        <AssociationConnector Association="CommunityDbModel.FK__PersonInf__Fathe__22AA2996" />
+        <AssociationConnector Association="CommunityDbModel.FK__PersonInf__Mothe__239E4DCF" />
+        <AssociationConnector Association="CommunityDbModel.FK__PersonInf__SakhI__47DBAE45" />
+        <AssociationConnector Association="CommunityDbModel.FK__StudentLo__Perso__40058253" />
+        <AssociationConnector Association="CommunityDbModel.FK__Sakh__VillageId__182C9B23" />
+        <AssociationConnector Association="CommunityDbModel.FK__StudentLo__Schem__40F9A68C" />
+        <AssociationConnector Association="CommunityDbModel.FK__VillageSt__Villa__15502E78" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

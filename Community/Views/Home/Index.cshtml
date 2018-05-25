@@ -1,0 +1,28 @@
+﻿﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <form method="post" id="msform" action="/home/index">
+            <fieldset>
+                <h2 class="fs-title">Login</h2>
+                <input type="text" name="email" placeholder="Email" />
+                <input type="password" name="password" placeholder="Password" />
+                <button class="next action-button">Login</button>
+            </fieldset>
+        </form>
+        <h3 class="fs-subtitle">Not a member? <a href="/home/signup"><strong>Signup</strong></a></h3>
+    </div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿﻿@using Community.Areas.Admin.Models
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout1.cshtml";
+}
+@model IEnumerable<Community.Areas.Admin.Models.LoanRepaymentViewModel>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Repayment</title>
+    <link href="~/Content/css/index.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <div id="msform">
+            <fieldset>
+                <h2 class="fs-title">Loan Repayment</h2>
+                <select id="generalLoanId">
+                    <option value="">Select General Loan</option>
+                    @foreach (var a in GeneralLoanRepository.Gets())
+                    {
+                        <option value="@a.Id">@a.PersonName @a.Amount</option>
+                    }
+                </select>
+                <select id="studentLoanId">
+                    <option value="">Select Student Loan</option>
+                    @foreach (var a in StudentLoanRepository.Gets())
+                    {
+                        <option value="@a.Id">@a.PersonName @a.Amount</option>
+                    }
+                </select>
+                <input type="text" id="payAmount" placeholder="Amount" />
+                <button class="next action-button" onclick="doCreate()">Create</button>
+            </fieldset>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <table id="table" class="table table-bordered">
+                        <tr>
+                            <th id="0">Id</th>
+                            <th id="1">General</th>
+                            <th id="2">Student</th>
+                            <th id="3">PayAmount</th>
+                            <th id="4">Date</th>
+                        </tr>
+                        <tbody id="tbody">
+                            @if (Model != null)
+                            {
+                                foreach (var a in Model)
+                                {
+                                    <tr>
+                                        <td>@a.Id</td>
+                                        <td>@a.GeneralLoanDetail</td>
+                                        <td>@a.StudentLoanDetail</td>
+                                        <td>@a.PayAmount</td>
+                                        <td>@a.Date</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+
+        function doCreate() {
+            var data = {
+                "generalLoanId": $("#generalLoanId").val(),
+                "studentLoanId": $("#studentLoanId").val(),
+                "payAmount":$("#payAmount").val()
+                };
+            console.log(data);
+            $.post("/admin/loanRepayment/create", data, function (re) {
+                console.log(re);
+                createList(re, "#tbody");
+            });
+
+        }
+
+        function createList(re, parent) {
+            $(parent).empty();
+            for (var a in re) {
+                var row = $("<tr>");
+                var id = $("<td>");
+                var general = $("<td>");
+                var student = $("<td>");
+                var amount = $("<td>");
+                var date = $("<td>");
+                id.text(re[a]["Id"]);
+                general.text(re[a]["GeneralLoanDetail"]);
+                student.text(re[a]["StudentLoanDetail"]);
+                amount.text(re[a]["PayAmount"]);
+                date.text(re[a]["Date"]);
+
+                id.appendTo(row);
+                general.appendTo(row);
+                student.appendTo(row);
+                amount.appendTo(row);
+                date.appendTo(row);
+                row.appendTo(parent);
+            }
+        }
+        $("#table th").on("click", function () {
+            $.post("/admin/loanRepayment/orderBy", { "orderBy": $(this).attr("id") }, function (re) {
+                createList(re, "#tbody");
+            });
+        })
+    </script>
+</body>

@@ -1,0 +1,1619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CommunityDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FamilyInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SakhId" Type="int" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeneralDonarDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonarId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Discription" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GeneralLoan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Discription" Type="varchar" MaxLength="200" />
+          <Property Name="InterestRate" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="MonthlyPeriod" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsPaidUp" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="LoanRepayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeneralLoanId" Type="int" />
+          <Property Name="StudentLoanId" Type="int" />
+          <Property Name="PayAmount" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoanType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+          <Property Name="Mobile" Type="varchar" MaxLength="10" />
+          <Property Name="Password" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="LastLogin" Type="date" />
+          <Property Name="IsVerified" Type="tinyint" />
+          <Property Name="Active" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Marriage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="ToPersonId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MassMrg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="DateTime" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MassMrgCommitties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MassMrgId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="Post" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MassMrgDonarDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MassMrgId" Type="int" Nullable="false" />
+          <Property Name="DonarId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Discription" Type="varchar" MaxLength="200" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MassMrgExpenditure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MassMrgId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ForDiscription" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MassMrgGift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MassMrgId" Type="int" Nullable="false" />
+          <Property Name="GiftTo" Type="int" Nullable="false" />
+          <Property Name="GiftFrom" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MassMrgReg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MassMrgId" Type="int" Nullable="false" />
+          <Property Name="GroomId" Type="int" Nullable="false" />
+          <Property Name="BrideId" Type="int" Nullable="false" />
+          <Property Name="Documents" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OtherPersonInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Hobbies" Type="varchar" MaxLength="60" />
+          <Property Name="LeanguageSpeak" Type="varchar" MaxLength="20" />
+          <Property Name="Achivement" Type="varchar" MaxLength="20" />
+          <Property Name="ExtraActivities" Type="varchar" MaxLength="100" />
+          <Property Name="LastUpdate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FamilyId" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Age" Type="int" Nullable="false" />
+          <Property Name="Birthdate" Type="date" Nullable="false" />
+          <Property Name="BirthPlace" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Education" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="Occupation" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="FatherId" Type="int" />
+          <Property Name="MotherId" Type="int" />
+          <Property Name="IsDead" Type="tinyint" />
+          <Property Name="CurrentAddresss" Type="varchar" MaxLength="200" />
+          <Property Name="IsMemberOfCommunityServiceCenter" Type="tinyint" />
+          <Property Name="DeathDate" Type="date" />
+          <Property Name="IsMarried" Type="tinyint" />
+          <Property Name="Height" Type="varchar" MaxLength="10" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="Photo" Type="varchar" MaxLength="40" />
+          <Property Name="SakhId" Type="int" />
+        </EntityType>
+        <EntityType Name="Sakh">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VillageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Scheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentLoan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="SchemeId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="Discription" Type="varchar" MaxLength="200" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsPaidUp" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Village">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Taluka" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="District" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VillageStatatics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VillageId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Detail" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="History" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__FamilyInf__SakhI__1BFD2C07">
+          <End Role="Sakh" Type="Self.Sakh" Multiplicity="0..1" />
+          <End Role="FamilyInfo" Type="Self.FamilyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sakh">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FamilyInfo">
+              <PropertyRef Name="SakhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GeneralDo__Donar__160F4887">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="GeneralDonarDetail" Type="Self.GeneralDonarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralDonarDetail">
+              <PropertyRef Name="DonarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GeneralLo__Perso__2A164134">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="GeneralLoan" Type="Self.GeneralLoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralLoan">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanRepay__Gener__4F47C5E3">
+          <End Role="GeneralLoan" Type="Self.GeneralLoan" Multiplicity="0..1" />
+          <End Role="LoanRepayment" Type="Self.LoanRepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneralLoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanRepayment">
+              <PropertyRef Name="GeneralLoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanRepay__Stude__503BEA1C">
+          <End Role="StudentLoan" Type="Self.StudentLoan" Multiplicity="0..1" />
+          <End Role="LoanRepayment" Type="Self.LoanRepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentLoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanRepayment">
+              <PropertyRef Name="StudentLoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Marriage__Person__2D27B809">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="Marriage" Type="Self.Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Marriage">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Marriage__ToPers__2E1BDC42">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="Marriage" Type="Self.Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Marriage">
+              <PropertyRef Name="ToPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgCo__MassM__6EF57B66">
+          <End Role="MassMrg" Type="Self.MassMrg" Multiplicity="1" />
+          <End Role="MassMrgCommitties" Type="Self.MassMrgCommitties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgCommitties">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgCo__Membe__6FE99F9F">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="MassMrgCommitties" Type="Self.MassMrgCommitties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgCommitties">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgDo__Donar__6477ECF3">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="MassMrgDonarDetail" Type="Self.MassMrgDonarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgDonarDetail">
+              <PropertyRef Name="DonarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgDo__MassM__6383C8BA">
+          <End Role="MassMrg" Type="Self.MassMrg" Multiplicity="1" />
+          <End Role="MassMrgDonarDetail" Type="Self.MassMrgDonarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgDonarDetail">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgEx__MassM__6754599E">
+          <End Role="MassMrg" Type="Self.MassMrg" Multiplicity="1" />
+          <End Role="MassMrgExpenditure" Type="Self.MassMrgExpenditure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgExpenditure">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgGi__GiftF__6C190EBB">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="MassMrgGift" Type="Self.MassMrgGift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgGift">
+              <PropertyRef Name="GiftFrom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgGi__GiftT__6B24EA82">
+          <End Role="MassMrgReg" Type="Self.MassMrgReg" Multiplicity="1" />
+          <End Role="MassMrgGift" Type="Self.MassMrgGift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrgReg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgGift">
+              <PropertyRef Name="GiftTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgGi__MassM__6A30C649">
+          <End Role="MassMrg" Type="Self.MassMrg" Multiplicity="1" />
+          <End Role="MassMrgGift" Type="Self.MassMrgGift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgGift">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgRe__Bride__60A75C0F">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="MassMrgReg" Type="Self.MassMrgReg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgReg">
+              <PropertyRef Name="BrideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgRe__Groom__5FB337D6">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="MassMrgReg" Type="Self.MassMrgReg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgReg">
+              <PropertyRef Name="GroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgRe__MassM__5EBF139D">
+          <End Role="MassMrg" Type="Self.MassMrg" Multiplicity="1" />
+          <End Role="MassMrgReg" Type="Self.MassMrgReg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgReg">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Famil__21B6055D">
+          <End Role="FamilyInfo" Type="Self.FamilyInfo" Multiplicity="0..1" />
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FamilyInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Fathe__22AA2996">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="0..1" />
+          <End Role="PersonInfo1" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo1">
+              <PropertyRef Name="FatherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Mothe__239E4DCF">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="0..1" />
+          <End Role="PersonInfo1" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo1">
+              <PropertyRef Name="MotherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__SakhI__47DBAE45">
+          <End Role="Sakh" Type="Self.Sakh" Multiplicity="0..1" />
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sakh">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="SakhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sakh__VillageId__182C9B23">
+          <End Role="Village" Type="Self.Village" Multiplicity="1" />
+          <End Role="Sakh" Type="Self.Sakh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Village">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sakh">
+              <PropertyRef Name="VillageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentLo__Perso__40058253">
+          <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="1" />
+          <End Role="StudentLoan" Type="Self.StudentLoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentLoan">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentLo__Schem__40F9A68C">
+          <End Role="Scheme" Type="Self.Scheme" Multiplicity="1" />
+          <End Role="StudentLoan" Type="Self.StudentLoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scheme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentLoan">
+              <PropertyRef Name="SchemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VillageSt__Villa__15502E78">
+          <End Role="Village" Type="Self.Village" Multiplicity="1" />
+          <End Role="VillageStatatics" Type="Self.VillageStatatics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Village">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VillageStatatics">
+              <PropertyRef Name="VillageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CommunityDbModelStoreContainer">
+          <EntitySet Name="FamilyInfo" EntityType="Self.FamilyInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralDonarDetail" EntityType="Self.GeneralDonarDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralLoan" EntityType="Self.GeneralLoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanRepayment" EntityType="Self.LoanRepayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanType" EntityType="Self.LoanType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginDetail" EntityType="Self.LoginDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marriage" EntityType="Self.Marriage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MassMrg" EntityType="Self.MassMrg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MassMrgCommitties" EntityType="Self.MassMrgCommitties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MassMrgDonarDetail" EntityType="Self.MassMrgDonarDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MassMrgExpenditure" EntityType="Self.MassMrgExpenditure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MassMrgGift" EntityType="Self.MassMrgGift" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MassMrgReg" EntityType="Self.MassMrgReg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OtherPersonInfo" EntityType="Self.OtherPersonInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonInfo" EntityType="Self.PersonInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sakh" EntityType="Self.Sakh" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scheme" EntityType="Self.Scheme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentLoan" EntityType="Self.StudentLoan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Village" EntityType="Self.Village" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VillageStatatics" EntityType="Self.VillageStatatics" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__FamilyInf__SakhI__1BFD2C07" Association="Self.FK__FamilyInf__SakhI__1BFD2C07">
+            <End Role="Sakh" EntitySet="Sakh" />
+            <End Role="FamilyInfo" EntitySet="FamilyInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GeneralDo__Donar__160F4887" Association="Self.FK__GeneralDo__Donar__160F4887">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="GeneralDonarDetail" EntitySet="GeneralDonarDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GeneralLo__Perso__2A164134" Association="Self.FK__GeneralLo__Perso__2A164134">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="GeneralLoan" EntitySet="GeneralLoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanRepay__Gener__4F47C5E3" Association="Self.FK__LoanRepay__Gener__4F47C5E3">
+            <End Role="GeneralLoan" EntitySet="GeneralLoan" />
+            <End Role="LoanRepayment" EntitySet="LoanRepayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanRepay__Stude__503BEA1C" Association="Self.FK__LoanRepay__Stude__503BEA1C">
+            <End Role="StudentLoan" EntitySet="StudentLoan" />
+            <End Role="LoanRepayment" EntitySet="LoanRepayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Marriage__Person__2D27B809" Association="Self.FK__Marriage__Person__2D27B809">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="Marriage" EntitySet="Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Marriage__ToPers__2E1BDC42" Association="Self.FK__Marriage__ToPers__2E1BDC42">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="Marriage" EntitySet="Marriage" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgCo__MassM__6EF57B66" Association="Self.FK__MassMrgCo__MassM__6EF57B66">
+            <End Role="MassMrg" EntitySet="MassMrg" />
+            <End Role="MassMrgCommitties" EntitySet="MassMrgCommitties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgCo__Membe__6FE99F9F" Association="Self.FK__MassMrgCo__Membe__6FE99F9F">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="MassMrgCommitties" EntitySet="MassMrgCommitties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgDo__Donar__6477ECF3" Association="Self.FK__MassMrgDo__Donar__6477ECF3">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="MassMrgDonarDetail" EntitySet="MassMrgDonarDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgDo__MassM__6383C8BA" Association="Self.FK__MassMrgDo__MassM__6383C8BA">
+            <End Role="MassMrg" EntitySet="MassMrg" />
+            <End Role="MassMrgDonarDetail" EntitySet="MassMrgDonarDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgEx__MassM__6754599E" Association="Self.FK__MassMrgEx__MassM__6754599E">
+            <End Role="MassMrg" EntitySet="MassMrg" />
+            <End Role="MassMrgExpenditure" EntitySet="MassMrgExpenditure" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgGi__GiftF__6C190EBB" Association="Self.FK__MassMrgGi__GiftF__6C190EBB">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="MassMrgGift" EntitySet="MassMrgGift" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgGi__GiftT__6B24EA82" Association="Self.FK__MassMrgGi__GiftT__6B24EA82">
+            <End Role="MassMrgReg" EntitySet="MassMrgReg" />
+            <End Role="MassMrgGift" EntitySet="MassMrgGift" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgGi__MassM__6A30C649" Association="Self.FK__MassMrgGi__MassM__6A30C649">
+            <End Role="MassMrg" EntitySet="MassMrg" />
+            <End Role="MassMrgGift" EntitySet="MassMrgGift" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgRe__Bride__60A75C0F" Association="Self.FK__MassMrgRe__Bride__60A75C0F">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="MassMrgReg" EntitySet="MassMrgReg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgRe__Groom__5FB337D6" Association="Self.FK__MassMrgRe__Groom__5FB337D6">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="MassMrgReg" EntitySet="MassMrgReg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgRe__MassM__5EBF139D" Association="Self.FK__MassMrgRe__MassM__5EBF139D">
+            <End Role="MassMrg" EntitySet="MassMrg" />
+            <End Role="MassMrgReg" EntitySet="MassMrgReg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Famil__21B6055D" Association="Self.FK__PersonInf__Famil__21B6055D">
+            <End Role="FamilyInfo" EntitySet="FamilyInfo" />
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Fathe__22AA2996" Association="Self.FK__PersonInf__Fathe__22AA2996">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="PersonInfo1" EntitySet="PersonInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Mothe__239E4DCF" Association="Self.FK__PersonInf__Mothe__239E4DCF">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="PersonInfo1" EntitySet="PersonInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__SakhI__47DBAE45" Association="Self.FK__PersonInf__SakhI__47DBAE45">
+            <End Role="Sakh" EntitySet="Sakh" />
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sakh__VillageId__182C9B23" Association="Self.FK__Sakh__VillageId__182C9B23">
+            <End Role="Village" EntitySet="Village" />
+            <End Role="Sakh" EntitySet="Sakh" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentLo__Perso__40058253" Association="Self.FK__StudentLo__Perso__40058253">
+            <End Role="PersonInfo" EntitySet="PersonInfo" />
+            <End Role="StudentLoan" EntitySet="StudentLoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentLo__Schem__40F9A68C" Association="Self.FK__StudentLo__Schem__40F9A68C">
+            <End Role="Scheme" EntitySet="Scheme" />
+            <End Role="StudentLoan" EntitySet="StudentLoan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VillageSt__Villa__15502E78" Association="Self.FK__VillageSt__Villa__15502E78">
+            <End Role="Village" EntitySet="Village" />
+            <End Role="VillageStatatics" EntitySet="VillageStatatics" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CommunityDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CommunityDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FamilyInfoes" EntityType="CommunityDbModel.FamilyInfo" />
+          <EntitySet Name="GeneralDonarDetails" EntityType="CommunityDbModel.GeneralDonarDetail" />
+          <EntitySet Name="GeneralLoans" EntityType="CommunityDbModel.GeneralLoan" />
+          <EntitySet Name="LoanRepayments" EntityType="CommunityDbModel.LoanRepayment" />
+          <EntitySet Name="LoanTypes" EntityType="CommunityDbModel.LoanType" />
+          <EntitySet Name="LoginDetails" EntityType="CommunityDbModel.LoginDetail" />
+          <EntitySet Name="Marriages" EntityType="CommunityDbModel.Marriage" />
+          <EntitySet Name="MassMrgs" EntityType="CommunityDbModel.MassMrg" />
+          <EntitySet Name="MassMrgCommitties" EntityType="CommunityDbModel.MassMrgCommitty" />
+          <EntitySet Name="MassMrgDonarDetails" EntityType="CommunityDbModel.MassMrgDonarDetail" />
+          <EntitySet Name="MassMrgExpenditures" EntityType="CommunityDbModel.MassMrgExpenditure" />
+          <EntitySet Name="MassMrgGifts" EntityType="CommunityDbModel.MassMrgGift" />
+          <EntitySet Name="MassMrgRegs" EntityType="CommunityDbModel.MassMrgReg" />
+          <EntitySet Name="OtherPersonInfoes" EntityType="CommunityDbModel.OtherPersonInfo" />
+          <EntitySet Name="PersonInfoes" EntityType="CommunityDbModel.PersonInfo" />
+          <EntitySet Name="Sakhs" EntityType="CommunityDbModel.Sakh" />
+          <EntitySet Name="Schemes" EntityType="CommunityDbModel.Scheme" />
+          <EntitySet Name="StudentLoans" EntityType="CommunityDbModel.StudentLoan" />
+          <EntitySet Name="Villages" EntityType="CommunityDbModel.Village" />
+          <EntitySet Name="VillageStatatics" EntityType="CommunityDbModel.VillageStatatic" />
+          <AssociationSet Name="FK__FamilyInf__SakhI__1BFD2C07" Association="CommunityDbModel.FK__FamilyInf__SakhI__1BFD2C07">
+            <End Role="Sakh" EntitySet="Sakhs" />
+            <End Role="FamilyInfo" EntitySet="FamilyInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Famil__21B6055D" Association="CommunityDbModel.FK__PersonInf__Famil__21B6055D">
+            <End Role="FamilyInfo" EntitySet="FamilyInfoes" />
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GeneralDo__Donar__160F4887" Association="CommunityDbModel.FK__GeneralDo__Donar__160F4887">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="GeneralDonarDetail" EntitySet="GeneralDonarDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GeneralLo__Perso__2A164134" Association="CommunityDbModel.FK__GeneralLo__Perso__2A164134">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="GeneralLoan" EntitySet="GeneralLoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanRepay__Gener__4F47C5E3" Association="CommunityDbModel.FK__LoanRepay__Gener__4F47C5E3">
+            <End Role="GeneralLoan" EntitySet="GeneralLoans" />
+            <End Role="LoanRepayment" EntitySet="LoanRepayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoanRepay__Stude__503BEA1C" Association="CommunityDbModel.FK__LoanRepay__Stude__503BEA1C">
+            <End Role="StudentLoan" EntitySet="StudentLoans" />
+            <End Role="LoanRepayment" EntitySet="LoanRepayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Marriage__Person__2D27B809" Association="CommunityDbModel.FK__Marriage__Person__2D27B809">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="Marriage" EntitySet="Marriages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Marriage__ToPers__2E1BDC42" Association="CommunityDbModel.FK__Marriage__ToPers__2E1BDC42">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="Marriage" EntitySet="Marriages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgCo__MassM__6EF57B66" Association="CommunityDbModel.FK__MassMrgCo__MassM__6EF57B66">
+            <End Role="MassMrg" EntitySet="MassMrgs" />
+            <End Role="MassMrgCommitty" EntitySet="MassMrgCommitties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgDo__MassM__6383C8BA" Association="CommunityDbModel.FK__MassMrgDo__MassM__6383C8BA">
+            <End Role="MassMrg" EntitySet="MassMrgs" />
+            <End Role="MassMrgDonarDetail" EntitySet="MassMrgDonarDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgEx__MassM__6754599E" Association="CommunityDbModel.FK__MassMrgEx__MassM__6754599E">
+            <End Role="MassMrg" EntitySet="MassMrgs" />
+            <End Role="MassMrgExpenditure" EntitySet="MassMrgExpenditures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgGi__MassM__6A30C649" Association="CommunityDbModel.FK__MassMrgGi__MassM__6A30C649">
+            <End Role="MassMrg" EntitySet="MassMrgs" />
+            <End Role="MassMrgGift" EntitySet="MassMrgGifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgRe__MassM__5EBF139D" Association="CommunityDbModel.FK__MassMrgRe__MassM__5EBF139D">
+            <End Role="MassMrg" EntitySet="MassMrgs" />
+            <End Role="MassMrgReg" EntitySet="MassMrgRegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgCo__Membe__6FE99F9F" Association="CommunityDbModel.FK__MassMrgCo__Membe__6FE99F9F">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="MassMrgCommitty" EntitySet="MassMrgCommitties" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgDo__Donar__6477ECF3" Association="CommunityDbModel.FK__MassMrgDo__Donar__6477ECF3">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="MassMrgDonarDetail" EntitySet="MassMrgDonarDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgGi__GiftF__6C190EBB" Association="CommunityDbModel.FK__MassMrgGi__GiftF__6C190EBB">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="MassMrgGift" EntitySet="MassMrgGifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgGi__GiftT__6B24EA82" Association="CommunityDbModel.FK__MassMrgGi__GiftT__6B24EA82">
+            <End Role="MassMrgReg" EntitySet="MassMrgRegs" />
+            <End Role="MassMrgGift" EntitySet="MassMrgGifts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgRe__Bride__60A75C0F" Association="CommunityDbModel.FK__MassMrgRe__Bride__60A75C0F">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="MassMrgReg" EntitySet="MassMrgRegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MassMrgRe__Groom__5FB337D6" Association="CommunityDbModel.FK__MassMrgRe__Groom__5FB337D6">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="MassMrgReg" EntitySet="MassMrgRegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Fathe__22AA2996" Association="CommunityDbModel.FK__PersonInf__Fathe__22AA2996">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="PersonInfo1" EntitySet="PersonInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__Mothe__239E4DCF" Association="CommunityDbModel.FK__PersonInf__Mothe__239E4DCF">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="PersonInfo1" EntitySet="PersonInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PersonInf__SakhI__47DBAE45" Association="CommunityDbModel.FK__PersonInf__SakhI__47DBAE45">
+            <End Role="Sakh" EntitySet="Sakhs" />
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentLo__Perso__40058253" Association="CommunityDbModel.FK__StudentLo__Perso__40058253">
+            <End Role="PersonInfo" EntitySet="PersonInfoes" />
+            <End Role="StudentLoan" EntitySet="StudentLoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sakh__VillageId__182C9B23" Association="CommunityDbModel.FK__Sakh__VillageId__182C9B23">
+            <End Role="Village" EntitySet="Villages" />
+            <End Role="Sakh" EntitySet="Sakhs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentLo__Schem__40F9A68C" Association="CommunityDbModel.FK__StudentLo__Schem__40F9A68C">
+            <End Role="Scheme" EntitySet="Schemes" />
+            <End Role="StudentLoan" EntitySet="StudentLoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VillageSt__Villa__15502E78" Association="CommunityDbModel.FK__VillageSt__Villa__15502E78">
+            <End Role="Village" EntitySet="Villages" />
+            <End Role="VillageStatatic" EntitySet="VillageStatatics" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="FamilyInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SakhId" Type="Int32" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sakh" Relationship="CommunityDbModel.FK__FamilyInf__SakhI__1BFD2C07" FromRole="FamilyInfo" ToRole="Sakh" />
+          <NavigationProperty Name="PersonInfoes" Relationship="CommunityDbModel.FK__PersonInf__Famil__21B6055D" FromRole="FamilyInfo" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="GeneralDonarDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonarId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Discription" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__GeneralDo__Donar__160F4887" FromRole="GeneralDonarDetail" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="GeneralLoan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="InterestRate" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="MonthlyPeriod" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsPaidUp" Type="Byte" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__GeneralLo__Perso__2A164134" FromRole="GeneralLoan" ToRole="PersonInfo" />
+          <NavigationProperty Name="LoanRepayments" Relationship="CommunityDbModel.FK__LoanRepay__Gener__4F47C5E3" FromRole="GeneralLoan" ToRole="LoanRepayment" />
+        </EntityType>
+        <EntityType Name="LoanRepayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeneralLoanId" Type="Int32" />
+          <Property Name="StudentLoanId" Type="Int32" />
+          <Property Name="PayAmount" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="GeneralLoan" Relationship="CommunityDbModel.FK__LoanRepay__Gener__4F47C5E3" FromRole="LoanRepayment" ToRole="GeneralLoan" />
+          <NavigationProperty Name="StudentLoan" Relationship="CommunityDbModel.FK__LoanRepay__Stude__503BEA1C" FromRole="LoanRepayment" ToRole="StudentLoan" />
+        </EntityType>
+        <EntityType Name="LoanType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="LoginDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="LastLogin" Type="DateTime" Precision="0" />
+          <Property Name="IsVerified" Type="Byte" />
+          <Property Name="Active" Type="Byte" />
+        </EntityType>
+        <EntityType Name="Marriage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="ToPersonId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__Marriage__Person__2D27B809" FromRole="Marriage" ToRole="PersonInfo" />
+          <NavigationProperty Name="PersonInfo1" Relationship="CommunityDbModel.FK__Marriage__ToPers__2E1BDC42" FromRole="Marriage" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="MassMrg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MassMrgCommitties" Relationship="CommunityDbModel.FK__MassMrgCo__MassM__6EF57B66" FromRole="MassMrg" ToRole="MassMrgCommitty" />
+          <NavigationProperty Name="MassMrgDonarDetails" Relationship="CommunityDbModel.FK__MassMrgDo__MassM__6383C8BA" FromRole="MassMrg" ToRole="MassMrgDonarDetail" />
+          <NavigationProperty Name="MassMrgExpenditures" Relationship="CommunityDbModel.FK__MassMrgEx__MassM__6754599E" FromRole="MassMrg" ToRole="MassMrgExpenditure" />
+          <NavigationProperty Name="MassMrgGifts" Relationship="CommunityDbModel.FK__MassMrgGi__MassM__6A30C649" FromRole="MassMrg" ToRole="MassMrgGift" />
+          <NavigationProperty Name="MassMrgRegs" Relationship="CommunityDbModel.FK__MassMrgRe__MassM__5EBF139D" FromRole="MassMrg" ToRole="MassMrgReg" />
+        </EntityType>
+        <EntityType Name="MassMrgCommitty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MassMrgId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Post" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MassMrg" Relationship="CommunityDbModel.FK__MassMrgCo__MassM__6EF57B66" FromRole="MassMrgCommitty" ToRole="MassMrg" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__MassMrgCo__Membe__6FE99F9F" FromRole="MassMrgCommitty" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="MassMrgDonarDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MassMrgId" Type="Int32" Nullable="false" />
+          <Property Name="DonarId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MassMrg" Relationship="CommunityDbModel.FK__MassMrgDo__MassM__6383C8BA" FromRole="MassMrgDonarDetail" ToRole="MassMrg" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__MassMrgDo__Donar__6477ECF3" FromRole="MassMrgDonarDetail" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="MassMrgExpenditure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MassMrgId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ForDiscription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MassMrg" Relationship="CommunityDbModel.FK__MassMrgEx__MassM__6754599E" FromRole="MassMrgExpenditure" ToRole="MassMrg" />
+        </EntityType>
+        <EntityType Name="MassMrgGift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MassMrgId" Type="Int32" Nullable="false" />
+          <Property Name="GiftTo" Type="Int32" Nullable="false" />
+          <Property Name="GiftFrom" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MassMrg" Relationship="CommunityDbModel.FK__MassMrgGi__MassM__6A30C649" FromRole="MassMrgGift" ToRole="MassMrg" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__MassMrgGi__GiftF__6C190EBB" FromRole="MassMrgGift" ToRole="PersonInfo" />
+          <NavigationProperty Name="MassMrgReg" Relationship="CommunityDbModel.FK__MassMrgGi__GiftT__6B24EA82" FromRole="MassMrgGift" ToRole="MassMrgReg" />
+        </EntityType>
+        <EntityType Name="MassMrgReg">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MassMrgId" Type="Int32" Nullable="false" />
+          <Property Name="GroomId" Type="Int32" Nullable="false" />
+          <Property Name="BrideId" Type="Int32" Nullable="false" />
+          <Property Name="Documents" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MassMrg" Relationship="CommunityDbModel.FK__MassMrgRe__MassM__5EBF139D" FromRole="MassMrgReg" ToRole="MassMrg" />
+          <NavigationProperty Name="MassMrgGifts" Relationship="CommunityDbModel.FK__MassMrgGi__GiftT__6B24EA82" FromRole="MassMrgReg" ToRole="MassMrgGift" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__MassMrgRe__Bride__60A75C0F" FromRole="MassMrgReg" ToRole="PersonInfo" />
+          <NavigationProperty Name="PersonInfo1" Relationship="CommunityDbModel.FK__MassMrgRe__Groom__5FB337D6" FromRole="MassMrgReg" ToRole="PersonInfo" />
+        </EntityType>
+        <EntityType Name="OtherPersonInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Hobbies" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="LeanguageSpeak" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Achivement" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ExtraActivities" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="PersonInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FamilyId" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="BirthPlace" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Education" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Occupation" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="FatherId" Type="Int32" />
+          <Property Name="MotherId" Type="Int32" />
+          <Property Name="IsDead" Type="Byte" />
+          <Property Name="CurrentAddresss" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IsMemberOfCommunityServiceCenter" Type="Byte" />
+          <Property Name="DeathDate" Type="DateTime" Precision="0" />
+          <Property Name="IsMarried" Type="Byte" />
+          <Property Name="Height" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="Photo" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="SakhId" Type="Int32" />
+          <NavigationProperty Name="FamilyInfo" Relationship="CommunityDbModel.FK__PersonInf__Famil__21B6055D" FromRole="PersonInfo" ToRole="FamilyInfo" />
+          <NavigationProperty Name="GeneralDonarDetails" Relationship="CommunityDbModel.FK__GeneralDo__Donar__160F4887" FromRole="PersonInfo" ToRole="GeneralDonarDetail" />
+          <NavigationProperty Name="GeneralLoans" Relationship="CommunityDbModel.FK__GeneralLo__Perso__2A164134" FromRole="PersonInfo" ToRole="GeneralLoan" />
+          <NavigationProperty Name="Marriages" Relationship="CommunityDbModel.FK__Marriage__Person__2D27B809" FromRole="PersonInfo" ToRole="Marriage" />
+          <NavigationProperty Name="Marriages1" Relationship="CommunityDbModel.FK__Marriage__ToPers__2E1BDC42" FromRole="PersonInfo" ToRole="Marriage" />
+          <NavigationProperty Name="MassMrgCommitties" Relationship="CommunityDbModel.FK__MassMrgCo__Membe__6FE99F9F" FromRole="PersonInfo" ToRole="MassMrgCommitty" />
+          <NavigationProperty Name="MassMrgDonarDetails" Relationship="CommunityDbModel.FK__MassMrgDo__Donar__6477ECF3" FromRole="PersonInfo" ToRole="MassMrgDonarDetail" />
+          <NavigationProperty Name="MassMrgGifts" Relationship="CommunityDbModel.FK__MassMrgGi__GiftF__6C190EBB" FromRole="PersonInfo" ToRole="MassMrgGift" />
+          <NavigationProperty Name="MassMrgRegs" Relationship="CommunityDbModel.FK__MassMrgRe__Bride__60A75C0F" FromRole="PersonInfo" ToRole="MassMrgReg" />
+          <NavigationProperty Name="MassMrgRegs1" Relationship="CommunityDbModel.FK__MassMrgRe__Groom__5FB337D6" FromRole="PersonInfo" ToRole="MassMrgReg" />
+          <NavigationProperty Name="PersonInfo1" Relationship="CommunityDbModel.FK__PersonInf__Fathe__22AA2996" FromRole="PersonInfo" ToRole="PersonInfo1" />
+          <NavigationProperty Name="PersonInfo2" Relationship="CommunityDbModel.FK__PersonInf__Fathe__22AA2996" FromRole="PersonInfo1" ToRole="PersonInfo" />
+          <NavigationProperty Name="PersonInfo11" Relationship="CommunityDbModel.FK__PersonInf__Mothe__239E4DCF" FromRole="PersonInfo" ToRole="PersonInfo1" />
+          <NavigationProperty Name="PersonInfo3" Relationship="CommunityDbModel.FK__PersonInf__Mothe__239E4DCF" FromRole="PersonInfo1" ToRole="PersonInfo" />
+          <NavigationProperty Name="Sakh" Relationship="CommunityDbModel.FK__PersonInf__SakhI__47DBAE45" FromRole="PersonInfo" ToRole="Sakh" />
+          <NavigationProperty Name="StudentLoans" Relationship="CommunityDbModel.FK__StudentLo__Perso__40058253" FromRole="PersonInfo" ToRole="StudentLoan" />
+        </EntityType>
+        <EntityType Name="Sakh">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VillageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FamilyInfoes" Relationship="CommunityDbModel.FK__FamilyInf__SakhI__1BFD2C07" FromRole="Sakh" ToRole="FamilyInfo" />
+          <NavigationProperty Name="PersonInfoes" Relationship="CommunityDbModel.FK__PersonInf__SakhI__47DBAE45" FromRole="Sakh" ToRole="PersonInfo" />
+          <NavigationProperty Name="Village" Relationship="CommunityDbModel.FK__Sakh__VillageId__182C9B23" FromRole="Sakh" ToRole="Village" />
+        </EntityType>
+        <EntityType Name="Scheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="StudentLoans" Relationship="CommunityDbModel.FK__StudentLo__Schem__40F9A68C" FromRole="Scheme" ToRole="StudentLoan" />
+        </EntityType>
+        <EntityType Name="StudentLoan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="SchemeId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Discription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsPaidUp" Type="Byte" />
+          <NavigationProperty Name="LoanRepayments" Relationship="CommunityDbModel.FK__LoanRepay__Stude__503BEA1C" FromRole="StudentLoan" ToRole="LoanRepayment" />
+          <NavigationProperty Name="PersonInfo" Relationship="CommunityDbModel.FK__StudentLo__Perso__40058253" FromRole="StudentLoan" ToRole="PersonInfo" />
+          <NavigationProperty Name="Scheme" Relationship="CommunityDbModel.FK__StudentLo__Schem__40F9A68C" FromRole="StudentLoan" ToRole="Scheme" />
+        </EntityType>
+        <EntityType Name="Village">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Taluka" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="District" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Sakhs" Relationship="CommunityDbModel.FK__Sakh__VillageId__182C9B23" FromRole="Village" ToRole="Sakh" />
+          <NavigationProperty Name="VillageStatatics" Relationship="CommunityDbModel.FK__VillageSt__Villa__15502E78" FromRole="Village" ToRole="VillageStatatic" />
+        </EntityType>
+        <EntityType Name="VillageStatatic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VillageId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Detail" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="History" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Village" Relationship="CommunityDbModel.FK__VillageSt__Villa__15502E78" FromRole="VillageStatatic" ToRole="Village" />
+        </EntityType>
+        <Association Name="FK__FamilyInf__SakhI__1BFD2C07">
+          <End Type="CommunityDbModel.Sakh" Role="Sakh" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.FamilyInfo" Role="FamilyInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sakh">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FamilyInfo">
+              <PropertyRef Name="SakhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Famil__21B6055D">
+          <End Type="CommunityDbModel.FamilyInfo" Role="FamilyInfo" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FamilyInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GeneralDo__Donar__160F4887">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.GeneralDonarDetail" Role="GeneralDonarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralDonarDetail">
+              <PropertyRef Name="DonarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GeneralLo__Perso__2A164134">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.GeneralLoan" Role="GeneralLoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GeneralLoan">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanRepay__Gener__4F47C5E3">
+          <End Type="CommunityDbModel.GeneralLoan" Role="GeneralLoan" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.LoanRepayment" Role="LoanRepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneralLoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanRepayment">
+              <PropertyRef Name="GeneralLoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoanRepay__Stude__503BEA1C">
+          <End Type="CommunityDbModel.StudentLoan" Role="StudentLoan" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.LoanRepayment" Role="LoanRepayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentLoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoanRepayment">
+              <PropertyRef Name="StudentLoanId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Marriage__Person__2D27B809">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.Marriage" Role="Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Marriage">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Marriage__ToPers__2E1BDC42">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.Marriage" Role="Marriage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Marriage">
+              <PropertyRef Name="ToPersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgCo__MassM__6EF57B66">
+          <End Type="CommunityDbModel.MassMrg" Role="MassMrg" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgCommitty" Role="MassMrgCommitty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgCommitty">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgDo__MassM__6383C8BA">
+          <End Type="CommunityDbModel.MassMrg" Role="MassMrg" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgDonarDetail" Role="MassMrgDonarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgDonarDetail">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgEx__MassM__6754599E">
+          <End Type="CommunityDbModel.MassMrg" Role="MassMrg" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgExpenditure" Role="MassMrgExpenditure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgExpenditure">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgGi__MassM__6A30C649">
+          <End Type="CommunityDbModel.MassMrg" Role="MassMrg" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgGift" Role="MassMrgGift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgGift">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgRe__MassM__5EBF139D">
+          <End Type="CommunityDbModel.MassMrg" Role="MassMrg" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgReg" Role="MassMrgReg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgReg">
+              <PropertyRef Name="MassMrgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgCo__Membe__6FE99F9F">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgCommitty" Role="MassMrgCommitty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgCommitty">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgDo__Donar__6477ECF3">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgDonarDetail" Role="MassMrgDonarDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgDonarDetail">
+              <PropertyRef Name="DonarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgGi__GiftF__6C190EBB">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgGift" Role="MassMrgGift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgGift">
+              <PropertyRef Name="GiftFrom" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgGi__GiftT__6B24EA82">
+          <End Type="CommunityDbModel.MassMrgReg" Role="MassMrgReg" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgGift" Role="MassMrgGift" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MassMrgReg">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgGift">
+              <PropertyRef Name="GiftTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgRe__Bride__60A75C0F">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgReg" Role="MassMrgReg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgReg">
+              <PropertyRef Name="BrideId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MassMrgRe__Groom__5FB337D6">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.MassMrgReg" Role="MassMrgReg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MassMrgReg">
+              <PropertyRef Name="GroomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Fathe__22AA2996">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo1">
+              <PropertyRef Name="FatherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__Mothe__239E4DCF">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo1">
+              <PropertyRef Name="MotherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PersonInf__SakhI__47DBAE45">
+          <End Type="CommunityDbModel.Sakh" Role="Sakh" Multiplicity="0..1" />
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sakh">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonInfo">
+              <PropertyRef Name="SakhId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentLo__Perso__40058253">
+          <End Type="CommunityDbModel.PersonInfo" Role="PersonInfo" Multiplicity="1" />
+          <End Type="CommunityDbModel.StudentLoan" Role="StudentLoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentLoan">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sakh__VillageId__182C9B23">
+          <End Type="CommunityDbModel.Village" Role="Village" Multiplicity="1" />
+          <End Type="CommunityDbModel.Sakh" Role="Sakh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Village">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sakh">
+              <PropertyRef Name="VillageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentLo__Schem__40F9A68C">
+          <End Type="CommunityDbModel.Scheme" Role="Scheme" Multiplicity="1" />
+          <End Type="CommunityDbModel.StudentLoan" Role="StudentLoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Scheme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentLoan">
+              <PropertyRef Name="SchemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VillageSt__Villa__15502E78">
+          <End Type="CommunityDbModel.Village" Role="Village" Multiplicity="1" />
+          <End Type="CommunityDbModel.VillageStatatic" Role="VillageStatatic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Village">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VillageStatatic">
+              <PropertyRef Name="VillageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CommunityDbModelStoreContainer" CdmEntityContainer="CommunityDbEntities">
+          <EntitySetMapping Name="FamilyInfoes">
+            <EntityTypeMapping TypeName="CommunityDbModel.FamilyInfo">
+              <MappingFragment StoreEntitySet="FamilyInfo">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SakhId" ColumnName="SakhId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralDonarDetails">
+            <EntityTypeMapping TypeName="CommunityDbModel.GeneralDonarDetail">
+              <MappingFragment StoreEntitySet="GeneralDonarDetail">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DonarId" ColumnName="DonarId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralLoans">
+            <EntityTypeMapping TypeName="CommunityDbModel.GeneralLoan">
+              <MappingFragment StoreEntitySet="GeneralLoan">
+                <ScalarProperty Name="IsPaidUp" ColumnName="IsPaidUp" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MonthlyPeriod" ColumnName="MonthlyPeriod" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanRepayments">
+            <EntityTypeMapping TypeName="CommunityDbModel.LoanRepayment">
+              <MappingFragment StoreEntitySet="LoanRepayment">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PayAmount" ColumnName="PayAmount" />
+                <ScalarProperty Name="StudentLoanId" ColumnName="StudentLoanId" />
+                <ScalarProperty Name="GeneralLoanId" ColumnName="GeneralLoanId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanTypes">
+            <EntityTypeMapping TypeName="CommunityDbModel.LoanType">
+              <MappingFragment StoreEntitySet="LoanType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginDetails">
+            <EntityTypeMapping TypeName="CommunityDbModel.LoginDetail">
+              <MappingFragment StoreEntitySet="LoginDetail">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IsVerified" ColumnName="IsVerified" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marriages">
+            <EntityTypeMapping TypeName="CommunityDbModel.Marriage">
+              <MappingFragment StoreEntitySet="Marriage">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ToPersonId" ColumnName="ToPersonId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassMrgs">
+            <EntityTypeMapping TypeName="CommunityDbModel.MassMrg">
+              <MappingFragment StoreEntitySet="MassMrg">
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassMrgCommitties">
+            <EntityTypeMapping TypeName="CommunityDbModel.MassMrgCommitty">
+              <MappingFragment StoreEntitySet="MassMrgCommitties">
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MassMrgId" ColumnName="MassMrgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassMrgDonarDetails">
+            <EntityTypeMapping TypeName="CommunityDbModel.MassMrgDonarDetail">
+              <MappingFragment StoreEntitySet="MassMrgDonarDetail">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DonarId" ColumnName="DonarId" />
+                <ScalarProperty Name="MassMrgId" ColumnName="MassMrgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassMrgExpenditures">
+            <EntityTypeMapping TypeName="CommunityDbModel.MassMrgExpenditure">
+              <MappingFragment StoreEntitySet="MassMrgExpenditure">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ForDiscription" ColumnName="ForDiscription" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="MassMrgId" ColumnName="MassMrgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassMrgGifts">
+            <EntityTypeMapping TypeName="CommunityDbModel.MassMrgGift">
+              <MappingFragment StoreEntitySet="MassMrgGift">
+                <ScalarProperty Name="GiftFrom" ColumnName="GiftFrom" />
+                <ScalarProperty Name="GiftTo" ColumnName="GiftTo" />
+                <ScalarProperty Name="MassMrgId" ColumnName="MassMrgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MassMrgRegs">
+            <EntityTypeMapping TypeName="CommunityDbModel.MassMrgReg">
+              <MappingFragment StoreEntitySet="MassMrgReg">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Documents" ColumnName="Documents" />
+                <ScalarProperty Name="BrideId" ColumnName="BrideId" />
+                <ScalarProperty Name="GroomId" ColumnName="GroomId" />
+                <ScalarProperty Name="MassMrgId" ColumnName="MassMrgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OtherPersonInfoes">
+            <EntityTypeMapping TypeName="CommunityDbModel.OtherPersonInfo">
+              <MappingFragment StoreEntitySet="OtherPersonInfo">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="ExtraActivities" ColumnName="ExtraActivities" />
+                <ScalarProperty Name="Achivement" ColumnName="Achivement" />
+                <ScalarProperty Name="LeanguageSpeak" ColumnName="LeanguageSpeak" />
+                <ScalarProperty Name="Hobbies" ColumnName="Hobbies" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonInfoes">
+            <EntityTypeMapping TypeName="CommunityDbModel.PersonInfo">
+              <MappingFragment StoreEntitySet="PersonInfo">
+                <ScalarProperty Name="SakhId" ColumnName="SakhId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="IsMarried" ColumnName="IsMarried" />
+                <ScalarProperty Name="DeathDate" ColumnName="DeathDate" />
+                <ScalarProperty Name="IsMemberOfCommunityServiceCenter" ColumnName="IsMemberOfCommunityServiceCenter" />
+                <ScalarProperty Name="CurrentAddresss" ColumnName="CurrentAddresss" />
+                <ScalarProperty Name="IsDead" ColumnName="IsDead" />
+                <ScalarProperty Name="MotherId" ColumnName="MotherId" />
+                <ScalarProperty Name="FatherId" ColumnName="FatherId" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sakhs">
+            <EntityTypeMapping TypeName="CommunityDbModel.Sakh">
+              <MappingFragment StoreEntitySet="Sakh">
+                <ScalarProperty Name="VillageId" ColumnName="VillageId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schemes">
+            <EntityTypeMapping TypeName="CommunityDbModel.Scheme">
+              <MappingFragment StoreEntitySet="Scheme">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentLoans">
+            <EntityTypeMapping TypeName="CommunityDbModel.StudentLoan">
+              <MappingFragment StoreEntitySet="StudentLoan">
+                <ScalarProperty Name="IsPaidUp" ColumnName="IsPaidUp" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Discription" ColumnName="Discription" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="SchemeId" ColumnName="SchemeId" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Villages">
+            <EntityTypeMapping TypeName="CommunityDbModel.Village">
+              <MappingFragment StoreEntitySet="Village">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Taluka" ColumnName="Taluka" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VillageStatatics">
+            <EntityTypeMapping TypeName="CommunityDbModel.VillageStatatic">
+              <MappingFragment StoreEntitySet="VillageStatatics">
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="VillageId" ColumnName="VillageId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

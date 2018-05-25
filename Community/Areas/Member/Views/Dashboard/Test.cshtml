@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+    <link href="~/Content/croppie.css" rel="stylesheet" />
+    <style>
+        #demo-basic {
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/croppie.min.js"></script>
+</head>
+<body>
+    <input type="file" id="upload-demo" />
+    <div id="page">
+        <div id="demo-basic">
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $uploadCrop = $('#upload-demo').croppie({
+                enableExif: true,
+                viewport: {
+                    width: 200,
+                    height: 200,
+                    type: 'circle'
+                },
+                boundary: {
+                    width: 300,
+                    height: 300
+                }
+            });
+        });
+    </script>
+</body>
+</html>
